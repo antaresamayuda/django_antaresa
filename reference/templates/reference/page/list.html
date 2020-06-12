@@ -1,0 +1,34 @@
+{% extends 'reference/base.html' %}
+{% load reference_tags %}
+
+{% block title %}
+    My Reference
+{% endblock title %}
+
+{% block content %}
+
+    <h1>Reference List</h1>
+    <a href="{% url 'reference:reference_create' %}" class="btn btn-success">Add Reference</a>
+    </br></br>
+    <ul>
+        {% for reference in references %}
+            <li>
+                <h2>
+                    {{ reference.title }}         
+                </h2>
+                <p class="date">
+                    Published {{ reference.publish }} by {{ reference.author }}
+                </p>
+                <a href="{{ reference.link }}">{{ reference.link }}</a>
+                {{ reference.description|markdown }}
+                {% if reference.author == request.user %}
+                    <a href="{% url 'reference:reference_update' reference.id reference.slug %}" class="btn btn-warning">Update Post</a> 
+                    <a href="{% url 'reference:reference_delete' reference.id reference.slug %}" class="btn btn-danger">Delete Post</a>
+                {% endif %}
+                </li><br>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    {% include "pagination.html" with page=page_obj %}
+{% endblock content %}

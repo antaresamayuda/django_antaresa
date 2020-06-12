@@ -8,7 +8,7 @@ class PublishedManager(models.Manager):
         return super(PublishedManager, self).get_queryset()\
             .filter(status='published')
 
-class Post(models.Model):
+class Reference(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),
@@ -16,7 +16,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish', blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reference_posts')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reference_list')
     description = models.TextField()
     link = models.URLField()
     publish = models.DateTimeField(default=timezone.now)
@@ -29,10 +29,11 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-publish',)
+        db_table = "reference"
 
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse_lazy('reference:post_detail', kwargs={ 'pk': self.id, 'slug': self.slug })
+    # def get_absolute_url(self):
+    #     return reverse_lazy('reference:reference_detail', kwargs={ 'pk': self.id, 'slug': self.slug })
 

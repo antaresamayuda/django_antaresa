@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Post
+from .models import Reference
 
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+@admin.register(Reference)
+class ReferenceAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'link', 'description', 'author', 'publish', 'status')
     list_filter = ('status', 'created', 'publish', 'author')
     search_fields = ('title', 'body')

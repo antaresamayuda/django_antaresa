@@ -3,6 +3,6 @@ from . import views
 
 app_name='reference'
 urlpatterns = [
-    path('posts/', views.PostListView.as_view(), name='api_post_list'),
-    path('posts/<int:pk>/', views.PostDetailView.as_view(), name='api_post_detail'),
+    path('list/', views.ReferenceListView.as_view(), name='api_reference_list'),
+    path('list/<int:pk>/', views.ReferenceDetailView.as_view(), name='api_reference_detail'),
 ]

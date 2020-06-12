@@ -1,0 +1,17 @@
+{% extends 'reference/base.html' %}
+{% load reference_tags %} -->
+
+{% block title %}
+    {{ reference.title }}
+{% endblock title %}
+
+{% block content %}
+    <h1>
+        {{ reference.title }}
+    </h1>
+    <p clas="date">
+        Published {{ reference.publish }} by {{ reference.author}}
+    </p>
+    {{ reference.link|markdown }}
+    {{ reference.description|markdown }}
+{% endblock content %}

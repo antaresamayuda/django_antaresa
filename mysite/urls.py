@@ -27,10 +27,12 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
+    path('reference/', include('reference.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, 
             name='django.contrib.sitemaps.views.sitemap'),
     path('account/', include('account.urls')),
     path('api/', include('blog.api.urls', namespace='api')),
+    path('api2/', include('reference.api.urls', namespace='api')),
     path('api_auth/', include('rest_framework.urls')),
 ]
 
